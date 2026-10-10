@@ -70,7 +70,7 @@ $result->corrected();            // pairs answered from your corrections
 $result->anonymized();           // pieces of personal data masked
 $result->modelRead();            // whether the model read it
 $result->modelWhy();             // 'memory' or 'test_key' when it did not
-$result->modelEffort();          // 'low', 'medium' or 'high': the effort it was made at
+$result->modelEffort();          // 'low', 'medium' or 'high': the level it was made at
 $result->isTest();               // a test key's answer is a marked copy: never publish it
 $result->tookMs();
 $result->raw;                    // the whole answer
@@ -78,9 +78,9 @@ $result->raw;                    // the whole answer
 
 ### Choosing how hard the model works
 
-`effort` (`low`, `medium` or `high`) can be passed as an option to `translate()`,
+`effort` (`default`, `low`, `medium` or `high`) can be passed as an option to `translate()`,
 `translateFile()`, `translateImage()` and `batch()`. The client sends it only when you give
-it, and the answer says which one was used (`modelEffort()`).
+it, and the answer says which level was used (`modelEffort()`). Leaving it out is the same as `default`: the level Translatorio recommends at the time (medium today), which moves as the models do. Name a level to keep it fixed.
 
 ```php
 $tr->translate($text, 'ja', ['effort' => 'high']);
