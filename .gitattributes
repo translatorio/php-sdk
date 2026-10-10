@@ -1,0 +1,7 @@
+# What does not travel in the installed package. Whoever installs it wants src/, not the suite.
+/tests           export-ignore
+/phpunit.xml     export-ignore
+/.gitattributes  export-ignore
+/.gitignore      export-ignore
+/.github         export-ignore
+/art            export-ignore

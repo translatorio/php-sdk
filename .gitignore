@@ -1,0 +1,11 @@
+/vendor
+/.phpunit.result.cache
+/.phpunit.cache
+
+# A library does not commit its lock: the application that installs it resolves one, and
+# here it would only turn every PHPUnit update into a noise commit. The CI runs
+# `composer update` on purpose, for the same reason.
+/composer.lock
+
+# Notes for whoever works on the client, not part of the package.
+/CLAUDE.md
