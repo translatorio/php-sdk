@@ -20,7 +20,7 @@ use Translatorio\Exception\ServerError;
  */
 class Client
 {
-    public const VERSION = '1.0.0';
+    public const VERSION = '1.0.1';
 
     private Transport $transport;
 
@@ -40,7 +40,7 @@ class Client
         private readonly string $baseUrl = 'https://translatorio.com/api',
         private readonly int $retries = 2,
         ?Transport $transport = null,
-        int $timeout = 10,
+        int $timeout = 120,
         private readonly int $maxWait = 30,
     ) {
         $this->transport = $transport ?? new CurlTransport(timeout: $timeout);

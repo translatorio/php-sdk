@@ -21,7 +21,7 @@ class CurlTransport implements Transport
      * @param int $connectTimeout Seconds to wait for the connection.
      */
     public function __construct(
-        private readonly int $timeout = 10,
+        private readonly int $timeout = 120,
         private readonly int $connectTimeout = 5,
     ) {
     }

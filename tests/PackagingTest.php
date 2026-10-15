@@ -68,7 +68,7 @@ class PackagingTest extends TestCase
 
     public function test_the_version_is_the_one_being_released(): void
     {
-        $this->assertSame('1.0.0', \Translatorio\Client::VERSION);
+        $this->assertSame('1.0.1', \Translatorio\Client::VERSION);
     }
 
     /**

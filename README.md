@@ -327,7 +327,7 @@ $tr = new Client(
     key: getenv('TRANSLATORIO_KEY'),           // tr_live_… or tr_test_… (free, never translated)
     baseUrl: 'https://translatorio.com/api',   // https: redirects are never followed
     retries: 2,                                // for 429, 5xx and the network; a 402 never
-    timeout: 10,                               // seconds per attempt, the reading included
+    timeout: 120,                              // seconds per attempt, the reading included
     maxWait: 30,                               // ceiling on the wait between attempts
 );
 ```
