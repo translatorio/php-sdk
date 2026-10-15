@@ -20,7 +20,7 @@ use Translatorio\Exception\ServerError;
  */
 class Client
 {
-    public const VERSION = '1.0.2';
+    public const VERSION = '1.1.0';
 
     private Transport $transport;
 
@@ -44,6 +44,31 @@ class Client
         private readonly int $maxWait = 30,
     ) {
         $this->transport = $transport ?? new CurlTransport(timeout: $timeout);
+    }
+
+    /**
+     * A client, without writing `new`. The same arguments as the constructor, which works
+     * just as well:
+     *
+     *     $tr = Client::create(getenv('TRANSLATORIO_KEY'));
+     *
+     * @param string $key Your API key: `tr_live_…` or `tr_test_…`.
+     * @param string $baseUrl Where the API lives, `/v1` excluded.
+     * @param int $retries How many times to ask again when it is worth asking again.
+     * @param Transport|null $transport Yours, if you have opinions about HTTP.
+     * @param int $timeout Seconds for the whole request, the answer's reading included.
+     * @param int $maxWait The longest wait between attempts, in seconds.
+     * @return self
+     */
+    public static function create(
+        string $key,
+        string $baseUrl = 'https://translatorio.com/api',
+        int $retries = 2,
+        ?Transport $transport = null,
+        int $timeout = 120,
+        int $maxWait = 30,
+    ): self {
+        return new self($key, $baseUrl, $retries, $transport, $timeout, $maxWait);
     }
 
     /**

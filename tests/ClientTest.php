@@ -3,6 +3,7 @@
 namespace Translatorio\Tests;
 
 use Translatorio\Batch;
+use Translatorio\Client;
 use Translatorio\Page;
 
 /**
@@ -15,6 +16,19 @@ use Translatorio\Page;
  */
 final class ClientTest extends TestCase
 {
+    public function test_create_builds_the_same_client_as_new(): void
+    {
+        $transport = new FakeTransport([[200, $this->translation()], [200, $this->translation()]]);
+
+        $created = Client::create('tr_test_key', 'https://example.test/api', transport: $transport);
+        $constructed = new Client('tr_test_key', 'https://example.test/api', transport: $transport);
+
+        $this->assertSame('Hola mundo', $created->translate('Hello world', 'es')->translation());
+        $this->assertSame('Hola mundo', $constructed->translate('Hello world', 'es')->translation());
+        $this->assertSame($transport->calls[0]['url'], $transport->calls[1]['url']);
+        $this->assertSame($transport->calls[0]['headers']['Authorization'], $transport->calls[1]['headers']['Authorization']);
+    }
+
     public function test_it_reads_a_translation(): void
     {
         [$tr, $transport] = $this->client([[200, $this->translation()]]);
@@ -41,7 +55,7 @@ final class ClientTest extends TestCase
         $this->assertSame('https://example.test/api/v1/translate', $call['url']);
         $this->assertSame(['text' => 'Hello world', 'target' => 'es', 'reference' => 'release-42'], $call['body']);
         $this->assertSame('Bearer tr_test_key', $call['headers']['Authorization']);
-        $this->assertSame('translatorio-php/1.0.2', $call['headers']['User-Agent']);
+        $this->assertSame('translatorio-php/1.1.0', $call['headers']['User-Agent']);
         $this->assertSame('application/json', $call['headers']['Content-Type']);
     }
 

@@ -2,7 +2,13 @@
 
 # Translatorio PHP SDK
 
-[![tests](https://github.com/translatorio/php-sdk/actions/workflows/tests.yml/badge.svg)](https://github.com/translatorio/php-sdk/actions/workflows/tests.yml) [![Packagist version](https://img.shields.io/packagist/v/edulazaro/translatorio-sdk.svg)](https://packagist.org/packages/edulazaro/translatorio-sdk) [![Packagist downloads](https://img.shields.io/packagist/dt/edulazaro/translatorio-sdk.svg)](https://packagist.org/packages/edulazaro/translatorio-sdk) [![license](https://img.shields.io/packagist/l/edulazaro/translatorio-sdk.svg)](https://github.com/translatorio/php-sdk/blob/main/LICENSE) [![PHP version](https://img.shields.io/packagist/dependency-v/edulazaro/translatorio-sdk/php.svg)](https://packagist.org/packages/edulazaro/translatorio-sdk)
+<p align="center">
+    <a href="https://github.com/translatorio/php-sdk/actions/workflows/tests.yml"><img src="https://github.com/translatorio/php-sdk/actions/workflows/tests.yml/badge.svg" alt="tests"></a>
+    <a href="https://packagist.org/packages/edulazaro/translatorio-sdk"><img src="https://img.shields.io/packagist/v/edulazaro/translatorio-sdk.svg" alt="Packagist version"></a>
+    <a href="https://packagist.org/packages/edulazaro/translatorio-sdk"><img src="https://img.shields.io/packagist/dt/edulazaro/translatorio-sdk.svg" alt="Packagist downloads"></a>
+    <a href="https://github.com/translatorio/php-sdk/blob/main/LICENSE"><img src="https://img.shields.io/packagist/l/edulazaro/translatorio-sdk.svg" alt="license"></a>
+    <a href="https://packagist.org/packages/edulazaro/translatorio-sdk"><img src="https://img.shields.io/packagist/dependency-v/edulazaro/translatorio-sdk/php.svg" alt="PHP version"></a>
+</p>
 
 The official PHP client for [Translatorio](https://translatorio.com), the translation API for
 text, HTML, Markdown, translation files and images.
@@ -14,7 +20,7 @@ composer require edulazaro/translatorio-sdk
 ```php
 use Translatorio\Client;
 
-$tr = new Client(getenv('TRANSLATORIO_KEY'));
+$tr = Client::create(getenv('TRANSLATORIO_KEY'));
 
 $result = $tr->translate('Hello :name, you have {count} new messages', 'es', [
     'reference' => 'release-42',
@@ -323,7 +329,7 @@ minutes fails the check, so a captured one cannot be replayed.
 ## Configuration
 
 ```php
-$tr = new Client(
+$tr = Client::create(
     key: getenv('TRANSLATORIO_KEY'),           // tr_live_… or tr_test_… (free, never translated)
     baseUrl: 'https://translatorio.com/api',   // https: redirects are never followed
     retries: 2,                                // for 429, 5xx and the network; a 402 never
@@ -331,6 +337,8 @@ $tr = new Client(
     maxWait: 30,                               // ceiling on the wait between attempts
 );
 ```
+
+`new Client(...)` takes the same arguments, if you would rather write it that way.
 
 A test key costs nothing and never reaches the model: it answers with a marked copy
 (`isTest()` and `modelWhy()` say so), which is what an integration test wants and never
@@ -355,7 +363,7 @@ final class MyTransport implements Transport
     }
 }
 
-$tr = new Client(getenv('TRANSLATORIO_KEY'), transport: new MyTransport());
+$tr = Client::create(getenv('TRANSLATORIO_KEY'), transport: new MyTransport());
 ```
 
 That is also how to test code that uses this client: hand it a transport that answers what
