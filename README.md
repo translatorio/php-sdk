@@ -1,7 +1,5 @@
 ![Translatorio PHP SDK](https://raw.githubusercontent.com/translatorio/php-sdk/main/art/banner.png)
 
-<!-- The banner (art/banner.png) is still to be generated. -->
-
 # Translatorio PHP SDK
 
 The official PHP client for [Translatorio](https://translatorio.com), the translation API for
