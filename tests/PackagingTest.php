@@ -66,9 +66,10 @@ class PackagingTest extends TestCase
         );
     }
 
-    public function test_the_version_is_the_one_being_released(): void
+    public function test_the_version_comes_from_composer_and_is_never_written_by_hand(): void
     {
-        $this->assertSame('1.1.0', \Translatorio\Client::VERSION);
+        $this->assertNotSame('', \Translatorio\Client::version());
+        $this->assertDoesNotMatchRegularExpression('/VERSION\s*=\s*[\'"]\d/', (string) file_get_contents(self::ROOT . '/src/Client.php'));
     }
 
     /**

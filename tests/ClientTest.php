@@ -55,7 +55,7 @@ final class ClientTest extends TestCase
         $this->assertSame('https://example.test/api/v1/translate', $call['url']);
         $this->assertSame(['text' => 'Hello world', 'target' => 'es', 'reference' => 'release-42'], $call['body']);
         $this->assertSame('Bearer tr_test_key', $call['headers']['Authorization']);
-        $this->assertSame('translatorio-php/1.1.0', $call['headers']['User-Agent']);
+        $this->assertSame('translatorio-php/' . Client::version(), $call['headers']['User-Agent']);
         $this->assertSame('application/json', $call['headers']['Content-Type']);
     }
 

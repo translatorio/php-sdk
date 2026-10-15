@@ -2,6 +2,7 @@
 
 namespace Translatorio;
 
+use Composer\InstalledVersions;
 use InvalidArgumentException;
 use Translatorio\Exception\ApiError;
 use Translatorio\Exception\AuthenticationError;
@@ -20,8 +21,6 @@ use Translatorio\Exception\ServerError;
  */
 class Client
 {
-    public const VERSION = '1.1.0';
-
     private Transport $transport;
 
     /**
@@ -44,6 +43,32 @@ class Client
         private readonly int $maxWait = 30,
     ) {
         $this->transport = $transport ?? new CurlTransport(timeout: $timeout);
+    }
+
+    /**
+     * The version installed, as Composer recorded it from the release tag. Nothing here is
+     * written by hand, so it cannot disagree with the tag it was installed from; `dev`
+     * outside a Composer install.
+     *
+     * @return string
+     */
+    public static function version(): string
+    {
+        static $version = null;
+
+        if ($version === null) {
+            $package = 'edulazaro/translatorio-sdk';
+            $version = class_exists(InstalledVersions::class) && InstalledVersions::isInstalled($package)
+                ? ltrim((string) (InstalledVersions::getPrettyVersion($package) ?? 'dev'), 'v')
+                : 'dev';
+
+            // Composer's answer for this repository itself, which no tag names.
+            if (str_contains($version, 'no-version-set')) {
+                $version = 'dev';
+            }
+        }
+
+        return $version;
     }
 
     /**
@@ -611,7 +636,7 @@ class Client
         $headers = [
             'Authorization' => 'Bearer ' . $this->key,
             'Accept' => 'application/json',
-            'User-Agent' => 'translatorio-php/' . self::VERSION,
+            'User-Agent' => 'translatorio-php/' . self::version(),
         ];
 
         if ($contentType !== null) {
