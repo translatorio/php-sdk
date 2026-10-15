@@ -2,7 +2,7 @@
 
 # Translatorio PHP SDK
 
-[![Packagist version](https://img.shields.io/packagist/v/edulazaro/translatorio-sdk.svg)](https://packagist.org/packages/edulazaro/translatorio-sdk) [![Packagist downloads](https://img.shields.io/packagist/dt/edulazaro/translatorio-sdk.svg)](https://packagist.org/packages/edulazaro/translatorio-sdk) [![license](https://img.shields.io/packagist/l/edulazaro/translatorio-sdk.svg)](https://github.com/translatorio/php-sdk/blob/main/LICENSE) [![PHP version](https://img.shields.io/packagist/dependency-v/edulazaro/translatorio-sdk/php.svg)](https://packagist.org/packages/edulazaro/translatorio-sdk)
+[![tests](https://github.com/translatorio/php-sdk/actions/workflows/tests.yml/badge.svg)](https://github.com/translatorio/php-sdk/actions/workflows/tests.yml) [![Packagist version](https://img.shields.io/packagist/v/edulazaro/translatorio-sdk.svg)](https://packagist.org/packages/edulazaro/translatorio-sdk) [![Packagist downloads](https://img.shields.io/packagist/dt/edulazaro/translatorio-sdk.svg)](https://packagist.org/packages/edulazaro/translatorio-sdk) [![license](https://img.shields.io/packagist/l/edulazaro/translatorio-sdk.svg)](https://github.com/translatorio/php-sdk/blob/main/LICENSE) [![PHP version](https://img.shields.io/packagist/dependency-v/edulazaro/translatorio-sdk/php.svg)](https://packagist.org/packages/edulazaro/translatorio-sdk)
 
 The official PHP client for [Translatorio](https://translatorio.com), the translation API for
 text, HTML, Markdown, translation files and images.
